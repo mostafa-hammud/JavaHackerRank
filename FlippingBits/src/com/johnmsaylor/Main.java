@@ -11,8 +11,21 @@ public class Main {
     //(return)convert back to base 10
 
     static long flippingBits(long n) {
-         String binaryString = Long.toBinaryString(n);
-         return 0;
+       String binaryString = Long.toBinaryString(n);
+         int length = binaryString.length();
+         int zerosNeeded = 32 - length;
+         for (int i = 0; i < zerosNeeded; i++) {
+            binaryString = '1' + binaryString; //add the converted part of the string
+        }
+         char[] chars = binaryString.toCharArray();
+         for (int i = zerosNeeded; i < length + zerosNeeded; i++) { //start the loop from the index after converted part
+
+            if (chars[i] == '0')
+                chars[i] = '1';
+            else
+                chars[i] = '0';
+         }   
+         return Long.valueOf(new String(chars), 2);
     }
 
     public static void main(String[] args) {
